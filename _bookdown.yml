@@ -1,0 +1,3 @@
+book_filename: "correlaidx-bremen_datentreff_2021-01"
+delete_merged_file: true
+clean: "_book/"

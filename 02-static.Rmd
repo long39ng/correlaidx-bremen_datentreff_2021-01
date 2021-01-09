@@ -1,0 +1,57 @@
+# Statische Grafiken mit `{ggplot2}`
+
+## Karte für ein bestimmtes Jahr {.panelset}
+
+### Code {-}
+
+```{r map-2015, fig.show='hide'}
+world_map <- rnaturalearth::ne_countries(returnclass = "sf") %>% 
+  select(iso_a3, geometry)
+
+mobile_world <- world_map %>% 
+  left_join(mobile, by = c("iso_a3" = "code"))
+
+mobile_world %>% 
+  filter(year == 2015) %>% 
+  ggplot(aes(fill = mobile_subs)) +
+  geom_sf(colour = "#f8f8f8", size = .25) +
+  scale_fill_continuous(guide = guide_legend(label.position = "top",
+                                             keywidth = 2,
+                                             keyheight = .5)) +
+  coord_sf(label_axes = "----", expand = FALSE, crs = "+proj=eqearth") +
+  labs(fill = NULL,
+       title = "Mobilfunkanschlüsse pro 100 Menschen",
+       subtitle = "im Jahr 2015",
+       caption = "Daten: OurWorldInData.org")
+```
+
+### Plot {-}
+
+```{r echo=FALSE}
+knitr::include_graphics(here::here("figs/map-2015-1.png"))
+```
+
+## Facetted-Grafik für mehrere Jahre {.panelset}
+
+### Code {-}
+
+```{r map-facets, fig.asp=1, fig.show='hide', cache=TRUE}
+mobile_world %>% 
+  filter(year %in% 2000:2015) %>% 
+  ggplot(aes(fill = mobile_subs)) +
+  geom_sf(colour = "#f8f8f8", size = .25) +
+  scale_fill_continuous(guide = guide_legend(label.position = "top",
+                                             keywidth = 2,
+                                             keyheight = .5)) +
+  coord_sf(label_axes = "----", expand = FALSE, crs = "+proj=eqearth") +
+  facet_wrap(~year) +
+  labs(fill = NULL,
+       title = "Mobilfunkanschlüsse pro 100 Menschen",
+       caption = "Daten: OurWorldInData.org")
+```
+
+### Plot {-}
+
+```{r echo=FALSE}
+knitr::include_graphics(here::here("figs/map-facets-1.png"))
+```

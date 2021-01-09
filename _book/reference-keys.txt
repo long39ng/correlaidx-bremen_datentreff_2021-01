@@ -1,0 +1,3 @@
+statische-grafiken-mit-ggplot2
+karte-für-ein-bestimmtes-jahr
+facetted-grafik-für-mehrere-jahre

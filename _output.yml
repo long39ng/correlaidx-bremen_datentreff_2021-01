@@ -1,0 +1,4 @@
+bookdown::bs4_book:
+  theme:
+    primary: "#434c5e"
+  repo: "https://github.com/long39ng/correlaidx-bremen_datentreff_2021-01"
