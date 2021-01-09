@@ -1,14 +1,14 @@
 --- 
 title: "Interaktive Datenvisualisierung mit Shiny"
 author: "Long Nguyen"
-date: "2021-01-14"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Warum Shiny? {-}
+# Warum Shiny?
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo = FALSE,
                       collapse = TRUE,
                       comment = "#>",
                       fig.align = "center",
@@ -20,8 +20,20 @@ xaringanExtra::use_panelset(in_xaringan = FALSE)
 
 source(here::here("utils/ggplot2_theme.R"), echo = FALSE)
 theme_set(theme_fira() + panel_grid(FALSE))
+
+library(flair)
 ```
 
-```{r echo=FALSE}
+```{r}
 knitr::include_graphics(here::here("figs/expanding-brain.jpg"))
+```
+
+## Daten
+
+```{r data, echo=TRUE, message=FALSE}
+library(tidyverse)
+
+mobile <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-10/mobile.csv",
+                   col_types = "cciinnc")
+mobile
 ```

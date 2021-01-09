@@ -1,3 +1,9 @@
+warum-shiny
+daten
 statische-grafiken-mit-ggplot2
 karte-für-ein-bestimmtes-jahr
 facetted-grafik-für-mehrere-jahre
+gif-animationen
+htmlwidgets
+timeline-in-echarts4r
+crosstalk

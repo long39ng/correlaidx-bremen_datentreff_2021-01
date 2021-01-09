@@ -1,10 +1,10 @@
-# Statische Grafiken mit `{ggplot2}`
+## Statische Grafiken mit `{ggplot2}`
 
-## Karte für ein bestimmtes Jahr {.panelset}
+### Karte für ein bestimmtes Jahr {.panelset}
 
-### Code {-}
+#### Plot {-}
 
-```{r map-2015, fig.show='hide'}
+```{r map-2015}
 world_map <- rnaturalearth::ne_countries(returnclass = "sf") %>% 
   select(iso_a3, geometry)
 
@@ -25,17 +25,16 @@ mobile_world %>%
        caption = "Daten: OurWorldInData.org")
 ```
 
-### Plot {-}
+#### Code {-}
 
-```{r echo=FALSE}
-knitr::include_graphics(here::here("figs/map-2015-1.png"))
+```{r ref.label='map-2015', echo=TRUE, eval=FALSE}
 ```
 
-## Facetted-Grafik für mehrere Jahre {.panelset}
+### Facetted-Grafik für mehrere Jahre {.panelset}
 
-### Code {-}
+#### Plot {-}
 
-```{r map-facets, fig.asp=1, fig.show='hide', cache=TRUE}
+```{r map-facets, fig.asp=.9, cache=TRUE}
 mobile_world %>% 
   filter(year %in% 2000:2015) %>% 
   ggplot(aes(fill = mobile_subs)) +
@@ -50,8 +49,7 @@ mobile_world %>%
        caption = "Daten: OurWorldInData.org")
 ```
 
-### Plot {-}
+#### Code {-}
 
-```{r echo=FALSE}
-knitr::include_graphics(here::here("figs/map-facets-1.png"))
+```{r ref.label='map-facets', echo=TRUE, eval=FALSE}
 ```

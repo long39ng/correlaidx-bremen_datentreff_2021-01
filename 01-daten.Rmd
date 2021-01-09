@@ -1,9 +1,0 @@
-# Daten {-}
-
-```{r data, message=FALSE}
-library(tidyverse)
-
-mobile <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-10/mobile.csv",
-                   col_types = "cciinnc")
-mobile
-```

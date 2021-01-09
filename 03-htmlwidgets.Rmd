@@ -1,0 +1,70 @@
+## [`htmlwidgets`](https://gallery.htmlwidgets.org/)
+
+Interaktive Web-Visualisierungen basierend auf JavaScript. Bsp.: [`{plotly}`](https://plot.ly/r/), [`{highcharter}`](http://jkunst.com/highcharter/), [`{echarts4r}`](https://echarts4r.john-coene.com/)
+
+### "Timeline" in `{echarts4r}` {.panelset}
+
+#### Plot {-}
+
+```{r map-echarts, warning=FALSE}
+library(echarts4r)
+
+mobile %>% 
+  filter(year %in% 2000:2015) %>% 
+  e_country_names(code, country, "iso3c") %>% # requires {countrycode}
+  group_by(year) %>% 
+  e_charts(country, timeline = TRUE) %>% 
+  e_map(mobile_subs) %>% 
+  e_visual_map(min = 0, max = 200) %>% 
+  e_title("Mobilfunkanschlüsse pro 100 Menschen")
+```
+
+#### Code {-}
+
+```{r}
+decorate("map-echarts", eval = FALSE) %>% 
+  flair("group_by(year)") %>% 
+  flair("timeline = TRUE")
+```
+
+### {.unlisted .unnumbered}
+
+Nachteile:
+
+- Input betrifft nur das eigene Widget
+- Kann nicht gleichzeitig nach mehreren Variablen filtern
+- Nur Slider
+
+### [`{crosstalk}`](https://rstudio.github.io/crosstalk/) {.panelset}
+
+Ermöglicht Cross-Widget-Interaktionen
+
+#### Plots {-}
+
+```{r crosstalk, message=FALSE, warning=FALSE}
+library(crosstalk)
+library(plotly)
+
+shared_mobile <- SharedData$new(mobile)
+
+filter_select("year", "Jahr", shared_mobile, ~year, multiple = FALSE)
+filter_checkbox("continent", "Kontinent", shared_mobile, ~continent, columns = 5)
+
+plot_ly(shared_mobile, x = ~mobile_subs) %>% 
+  add_histogram() %>%
+  layout(xaxis = list(title = "Mobilfunkanschlüsse pro 100 Menschen")) %>% 
+  config(displayModeBar = FALSE)
+```
+
+#### Code {-}
+
+```{r ref.label='crosstalk', echo=TRUE, eval=FALSE}
+```
+
+### {.unlisted .unnumbered}
+
+Nachteile:
+
+- eingeschränkte Funktionalität
+- `SharedData` können nicht transformiert werden
+- verfügbar nur für wenige htmlwidgets bzw. Pakete
