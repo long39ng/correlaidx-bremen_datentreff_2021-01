@@ -1,6 +1,6 @@
 ## [`htmlwidgets`](https://gallery.htmlwidgets.org/)
 
-Interaktive Web-Visualisierungen basierend auf JavaScript. Bsp.: [`{plotly}`](https://plot.ly/r/), [`{highcharter}`](http://jkunst.com/highcharter/), [`{echarts4r}`](https://echarts4r.john-coene.com/)
+Interaktive Web-Visualisierungen basierend auf JavaScript. Bsp.: [`{plotly}`](https://plot.ly/r/), [`{highcharter}`](http://jkunst.com/highcharter/), [`{echarts4r}`](https://echarts4r.john-coene.com/), [`{leaflet}`](https://rstudio.github.io/leaflet/)
 
 ### "Timeline" in `{echarts4r}` {.panelset}
 
@@ -43,17 +43,37 @@ Ermöglicht Cross-Widget-Interaktionen
 
 ```{r crosstalk, message=FALSE, warning=FALSE}
 library(crosstalk)
+library(htmltools)
 library(plotly)
 
-shared_mobile <- SharedData$new(mobile)
+shared_mobile <- SharedData$new(mobile %>% 
+                                  filter(year %in% 2000:2015))
 
-filter_select("year", "Jahr", shared_mobile, ~year, multiple = FALSE)
-filter_checkbox("continent", "Kontinent", shared_mobile, ~continent, columns = 5)
+div(style = "display: flex; flex-wrap: wrap; justify-content: center",
+    
+    div(filter_checkbox("continent", "Kontinent", shared_mobile, ~continent, columns = 5),
+        style = "width: 75%"),
+    
+    div(filter_select("year", "Jahr", shared_mobile, ~year, multiple = FALSE),
+        style = "width: 25%"),
 
-plot_ly(shared_mobile, x = ~mobile_subs) %>% 
-  add_histogram() %>%
-  layout(xaxis = list(title = "Mobilfunkanschlüsse pro 100 Menschen")) %>% 
-  config(displayModeBar = FALSE)
+    div(plot_ly(shared_mobile, x = ~mobile_subs) %>% 
+          add_histogram() %>%
+          layout(xaxis = list(title = "Mobilfunkanschlüsse pro 100 Menschen",
+                              fixedrange = TRUE),
+                 yaxis = list(title = "Anzahl",
+                              fixedrange = TRUE)) %>% 
+          config(displayModeBar = FALSE),
+        style = "width: 50%"),
+    
+    div(plot_ly(shared_mobile, x = ~gdp_per_cap, y = ~mobile_subs, text = ~entity) %>% 
+          add_markers() %>% 
+          layout(xaxis = list(title = "BIP pro Kopf",
+                              fixedrange = TRUE, type = "log"),
+                 yaxis = list(title = "Mobilfunkanschlüsse pro 100 Menschen",
+                              fixedrange = TRUE)) %>% 
+          config(displayModeBar = FALSE),
+        style = "width: 50%"))
 ```
 
 #### Code {-}

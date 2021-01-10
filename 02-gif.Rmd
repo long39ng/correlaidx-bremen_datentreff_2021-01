@@ -2,7 +2,7 @@
 
 Mögliche Lösungen: [`{gganimate}`](https://gganimate.com) (*Grammar-of-Graphics*-Umsetzung), [`{magick}`](https://docs.ropensci.org/magick/) (low-level, mehr Anpassungsmöglichkeiten)
 
-### Beispiel mit `{magick}` {.panelset} {-}
+### Beispiel mit `{magick}` {.unlisted .unnumbered .panelset}
 
 #### Plot {-}
 

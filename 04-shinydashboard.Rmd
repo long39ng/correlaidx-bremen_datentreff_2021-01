@@ -1,0 +1,63 @@
+# Einführung in Shiny -- mit [`{shinydashboard}`](https://rstudio.github.io/shinydashboard/)
+
+## Warum `{shinydashboard}`?
+
+- Im Vergleich zu Base-Shiny:
+  - Weniger Aufwand nötig für ein dezentes Layout
+- Im Vergleich zu `{flexdashboard}`:
+  - Mehr Gestaltungsflexibilität
+  - Kompatibel mit mehr htmlwidgets/Paketen
+  - Viel kürzere Ladezeit, weil ein `flexdashboard` geknittet werden muss^[Mit der Option `runtime: shiny_prerendered` kann die Ladezeit deutlich reduziert werden. Dafür muss der Code allerdings angepasst werden, sodass es nicht mehr einfacher als `{shinydashboard}` ist.]
+
+## Struktur eines `shinydashboard` {.panelset}
+
+Eine `app.R`-Datei:
+
+### Code {-}
+
+```{r echo=TRUE, eval=FALSE}
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage( # Layout von App-Komponenten
+  
+  dashboardHeader(title = ""),
+  
+  dashboardSidebar(
+    # Input-Kontrollelementen
+    # selectInput(), sliderInput(), radioButtons() etc.
+  ),
+  
+  dashboardBody(
+    # Layout von Output-Komponenten
+    # plotOutput(), plotlyOutput(), tableOutput() etc.
+  )
+)
+
+server <- function(input, output) {
+  # Output definieren
+  # renderPlot(), renderPlotly(), renderTable() etc.
+}
+
+shinyApp(ui, server)
+```
+
+### "Output" {-}
+
+```{r}
+knitr::include_graphics("https://rstudio.github.io/shinydashboard/images/blank_dashboard.png")
+```
+
+## {.unlisted .unnumbered}
+
+```{r out.width='100%'}
+knitr::include_graphics("https://cosimameyer.rbind.io/slides/correlcon/21.png")
+```
+
+<p style="text-align: right;">[(Cosima Meyer)](https://cosimameyer.rbind.io/slides/correlcon/talk#22)</p>
+
+## Ein `shinydashboard` erstellen (Live-Demo & Coding-Session)
+
+```{r}
+knitr::include_graphics("https://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif")
+```

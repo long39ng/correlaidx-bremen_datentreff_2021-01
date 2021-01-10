@@ -5,20 +5,17 @@
 #### Plot {-}
 
 ```{r map-2015}
-world_map <- rnaturalearth::ne_countries(returnclass = "sf") %>% 
-  select(iso_a3, geometry)
-
-mobile_world <- world_map %>% 
-  left_join(mobile, by = c("iso_a3" = "code"))
+source(here::here("utils/ggplot2_theme.R"), echo = FALSE)
 
 mobile_world %>% 
   filter(year == 2015) %>% 
   ggplot(aes(fill = mobile_subs)) +
   geom_sf(colour = "#f8f8f8", size = .25) +
-  scale_fill_continuous(guide = guide_legend(label.position = "top",
-                                             keywidth = 2,
-                                             keyheight = .5)) +
-  coord_sf(label_axes = "----", expand = FALSE, crs = "+proj=eqearth") +
+  scale_fill_continuous(limits = range(mobile_world$mobile_subs, na.rm = TRUE),
+                        guide = guide_colourbar(label.position = "top",
+                                                barwidth = 10, barheight = .5,
+                                                ticks.linewidth = 1)) +
+  coord_sf(label_axes = "----") +
   labs(fill = NULL,
        title = "Mobilfunkanschlüsse pro 100 Menschen",
        subtitle = "im Jahr 2015",
@@ -39,10 +36,11 @@ mobile_world %>%
   filter(year %in% 2000:2015) %>% 
   ggplot(aes(fill = mobile_subs)) +
   geom_sf(colour = "#f8f8f8", size = .25) +
-  scale_fill_continuous(guide = guide_legend(label.position = "top",
-                                             keywidth = 2,
-                                             keyheight = .5)) +
-  coord_sf(label_axes = "----", expand = FALSE, crs = "+proj=eqearth") +
+  scale_fill_continuous(limits = range(mobile_world$mobile_subs, na.rm = TRUE),
+                        guide = guide_colourbar(label.position = "top",
+                                                barwidth = 10, barheight = .5,
+                                                ticks.linewidth = 1)) +
+  coord_sf(label_axes = "----") +
   facet_wrap(~year) +
   labs(fill = NULL,
        title = "Mobilfunkanschlüsse pro 100 Menschen",

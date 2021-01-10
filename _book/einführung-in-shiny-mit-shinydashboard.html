@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Einführung in Shiny – mit {shinydashboard} | Interaktive Datenvisualisierung mit Shiny</title>
+<meta name="author" content="Long Nguyen">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.6/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.3.9000/tabs.js"></script><script src="libs/bs3compat-0.2.3.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/panelset-0.2.4/panelset.css" rel="stylesheet">
+<script src="libs/panelset-0.2.4/panelset.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/echarts4r-4.8.0/echarts-en.min.js"></script><script src="libs/echarts4r-4.8.0/ecStat.min.js"></script><script src="libs/echarts4r-4.8.0/dataTool.min.js"></script><script src="libs/echarts4r-binding-0.3.3/echarts4r.js"></script><script src="libs/echarts-world-1.0.0/world.js"></script><link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script><link href="libs/selectize-0.11.2/css/selectize.bootstrap3.css" rel="stylesheet">
+<script src="libs/selectize-0.11.2/js/selectize.min.js"></script><script src="libs/plotly-binding-4.9.2.2/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script><script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Interaktive Datenvisualisierung mit Shiny</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Warum Shiny?</a></li>
+<li><a class="active" href="einf%C3%BChrung-in-shiny-mit-shinydashboard.html"><span class="header-section-number">2</span> Einführung in Shiny – mit {shinydashboard}</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/long39ng/correlaidx-bremen_datentreff_2021-01">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="einführung-in-shiny-mit-shinydashboard" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Einführung in Shiny – mit <a href="https://rstudio.github.io/shinydashboard/"><code>{shinydashboard}</code></a><a class="anchor" aria-label="anchor" href="#einf%C3%BChrung-in-shiny-mit-shinydashboard"><i class="fas fa-link"></i></a>
+</h1>
+<div id="warum-shinydashboard" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Warum <code>{shinydashboard}</code>?<a class="anchor" aria-label="anchor" href="#warum-shinydashboard"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Im Vergleich zu Base-Shiny:
+<ul>
+<li>Weniger Aufwand nötig für ein dezentes Layout</li>
+</ul>
+</li>
+<li>Im Vergleich zu <a href="http://rmarkdown.rstudio.com/flexdashboard">flexdashboard</a>:
+<ul>
+<li>Mehr Gestaltungsflexibilität</li>
+<li>Kompatibel mit mehr htmlwidgets/Paketen</li>
+<li>Viel kürzere Ladezeit, weil ein <code>flexdashboard</code> geknittet werden muss<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Mit der Option &lt;code&gt;runtime: shiny_prerendered&lt;/code&gt; kann die Ladezeit deutlich reduziert werden. Dafür muss der Code allerdings angepasst werden, sodass es nicht mehr einfacher als &lt;code&gt;{shinydashboard}&lt;/code&gt; ist.&lt;/p&gt;"><sup>1</sup></a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="struktur-eines-shinydashboard" class="section level2 panelset" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Struktur eines <code>shinydashboard</code><a class="anchor" aria-label="anchor" href="#struktur-eines-shinydashboard"><i class="fas fa-link"></i></a>
+</h2>
+<p>Eine <code>app.R</code>-Datei:</p>
+<div id="code-5" class="section level3 unnumbered">
+<h3>Code<a class="anchor" aria-label="anchor" href="#code-5"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://shiny.rstudio.com">shiny</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a></span><span class="op">)</span>
+
+<span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shinydashboard/man/dashboardPage.html">dashboardPage</a></span><span class="op">(</span> <span class="co"># Layout von App-Komponenten</span>
+  
+  <span class="fu"><a href="https://rdrr.io/pkg/shinydashboard/man/dashboardHeader.html">dashboardHeader</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,
+  
+  <span class="fu"><a href="https://rdrr.io/pkg/shinydashboard/man/dashboardSidebar.html">dashboardSidebar</a></span><span class="op">(</span>
+    <span class="co"># Input-Kontrollelementen</span>
+    <span class="co"># selectInput(), sliderInput(), radioButtons() etc.</span>
+  <span class="op">)</span>,
+  
+  <span class="fu"><a href="https://rdrr.io/pkg/shinydashboard/man/dashboardBody.html">dashboardBody</a></span><span class="op">(</span>
+    <span class="co"># Layout von Output-Komponenten</span>
+    <span class="co"># plotOutput(), plotlyOutput(), tableOutput() etc.</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+
+<span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span>
+  <span class="co"># Output definieren</span>
+  <span class="co"># renderPlot(), renderPlotly(), renderTable() etc.</span>
+<span class="op">}</span>
+
+<span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="output" class="section level3 unnumbered">
+<h3>“Output”<a class="anchor" aria-label="anchor" href="#output"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure"><img src="https://rstudio.github.io/shinydashboard/images/blank_dashboard.png" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="section-2" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered"><a class="anchor" aria-label="anchor" href="#section-2"><i class="fas fa-link"></i></a></h2>
+<div class="inline-figure"><img src="https://cosimameyer.rbind.io/slides/correlcon/21.png" width="100%" style="display: block; margin: auto;"></div>
+<p style="text-align: right;">
+<a href="https://cosimameyer.rbind.io/slides/correlcon/talk#22">(Cosima Meyer)</a>
+</p>
+</div>
+<div id="ein-shinydashboard-erstellen-live-demo-coding-session" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Ein <code>shinydashboard</code> erstellen (Live-Demo &amp; Coding-Session)<a class="anchor" aria-label="anchor" href="#ein-shinydashboard-erstellen-live-demo-coding-session"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-figure"><img src="https://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif" style="display: block; margin: auto;"></div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Warum Shiny?</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#einf%C3%BChrung-in-shiny-mit-shinydashboard"><span class="header-section-number">2</span> Einführung in Shiny – mit {shinydashboard}</a></li>
+<li><a class="nav-link" href="#warum-shinydashboard"><span class="header-section-number">2.1</span> Warum {shinydashboard}?</a></li>
+<li>
+<a class="nav-link" href="#struktur-eines-shinydashboard"><span class="header-section-number">2.2</span> Struktur eines shinydashboard</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#code-5">Code</a></li>
+<li><a class="nav-link" href="#output">“Output”</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#section-2"></a></li>
+<li><a class="nav-link" href="#ein-shinydashboard-erstellen-live-demo-coding-session"><span class="header-section-number">2.3</span> Ein shinydashboard erstellen (Live-Demo &amp; Coding-Session)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/long39ng/correlaidx-bremen_datentreff_2021-01/blob/master/04-shinydashboard.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/long39ng/correlaidx-bremen_datentreff_2021-01/edit/master/04-shinydashboard.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Interaktive Datenvisualisierung mit Shiny</strong>" was written by Long Nguyen. It was last built on 2021-01-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

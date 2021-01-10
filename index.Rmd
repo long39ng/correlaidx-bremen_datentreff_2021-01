@@ -18,9 +18,6 @@ options(tibble.print_min = 6)
 
 xaringanExtra::use_panelset(in_xaringan = FALSE)
 
-source(here::here("utils/ggplot2_theme.R"), echo = FALSE)
-theme_set(theme_fira() + panel_grid(FALSE))
-
 library(flair)
 ```
 
@@ -36,4 +33,12 @@ library(tidyverse)
 mobile <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-10/mobile.csv",
                    col_types = "cciinnc")
 mobile
+
+world_map <- rnaturalearth::ne_countries(returnclass = "sf") %>% 
+  sf::st_transform("+proj=eqearth") %>% 
+  select(iso_a3, geometry)
+
+mobile_world <- world_map %>% 
+  left_join(mobile, by = c("iso_a3" = "code")) %>% 
+  select(-iso_a3)
 ```

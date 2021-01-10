@@ -7,3 +7,7 @@ gif-animationen
 htmlwidgets
 timeline-in-echarts4r
 crosstalk
+einführung-in-shiny-mit-shinydashboard
+warum-shinydashboard
+struktur-eines-shinydashboard
+ein-shinydashboard-erstellen-live-demo-coding-session
