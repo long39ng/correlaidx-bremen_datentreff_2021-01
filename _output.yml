@@ -1,4 +1,6 @@
 bookdown::bs4_book:
   theme:
-    primary: "#434c5e"
+    primary: "#5e81ac"
+    base_font: "'Fira Sans', Inter, 'Liberation Mono', 'Noto Color Emoji', sans-serif"
+    code_font: "'Fira Code', 'Fira Mono', 'Liberation Mono', monospace"
   repo: "https://github.com/long39ng/correlaidx-bremen_datentreff_2021-01"

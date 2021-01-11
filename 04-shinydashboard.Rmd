@@ -61,3 +61,22 @@ knitr::include_graphics("https://cosimameyer.rbind.io/slides/correlcon/21.png")
 ```{r}
 knitr::include_graphics("https://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif")
 ```
+
+## Weiterführende Links
+
+- [Mine Cetinkaya-Rundel, *Understanding reactivity*](https://github.com/mine-cetinkaya-rundel/dukelib-workshop-shiny-18/blob/master/03-reactivity/03-reactivity.pdf)
+- [Hadley Wickham, *Mastering Shiny* — Kapitel 4: *Basic Reactivity*](https://mastering-shiny.org/basic-reactivity.html)
+- [`shiny.decisions`](https://sparktuga.shinyapps.io/ShinyDecisions/) spielen  
+  ![](https://raw.githubusercontent.com/pedrocoutinhosilva/shiny.decisions/master/screenshots/shiny-decisions-large.png){width=50%}
+
+\...
+
+- weitere Shiny-UI-Optionen: [`{shinydashboardPlus}`](https://rinterface.github.io/shinydashboardPlus/), [`{semantic.dashboard}`](https://appsilon.github.io/semantic.dashboard/), [`{bslib}`](https://rstudio.github.io/bslib/)
+- Shiny-Module:  
+  - [Shiny-Dokumentation: *Modularizing Shiny app code*](https://shiny.rstudio.com/articles/modules.html)
+  - [Hadley Wickham, *Mastering Shiny* — Kapitel 19: *Shiny modules*](https://mastering-shiny.org/scaling-modules.html)
+- den Rest von [*Mastering Shiny*](https://mastering-shiny.org)
+- Shiny-App als R-Paket verpacken:  
+  - [`{golem}`](https://thinkr-open.github.io/golem/)
+  - Buch: Colin Fay et al., https://engineering-shiny.org/
+- Dean Attalis [Blog](https://deanattali.com/) und [Pakete](https://deanattali.com/projects/#r-packages)
