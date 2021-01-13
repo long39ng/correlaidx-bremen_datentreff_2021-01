@@ -2,11 +2,44 @@
 
 Interaktive Web-Visualisierungen basierend auf JavaScript. Bsp.: [`{plotly}`](https://plot.ly/r/), [`{highcharter}`](http://jkunst.com/highcharter/), [`{echarts4r}`](https://echarts4r.john-coene.com/), [`{leaflet}`](https://rstudio.github.io/leaflet/)
 
-### "Timeline" in `{echarts4r}` {.panelset}
+### "Motion" in `{highcharter}` {.panelset}
 
 #### Plot {-}
 
-```{r map-echarts, warning=FALSE}
+```{r map-highcharts, message=FALSE}
+library(highcharter)
+
+highchart(type = "map") %>% 
+  hc_add_series(data = mobile %>% 
+                  group_by(code) %>% 
+                  do(item = list(code = first(.$code),
+                                 sequence = .$mobile_subs,
+                                 value = first(.$mobile_subs))) %>% 
+                  pull(item),
+                mapData = download_map_data("custom/world-robinson.js"),
+                joinBy = c("iso-a3", "code"),
+                name = "Mobilfunkanschlüsse pro 100 Menschen",
+                borderColor = "#f8f8f8",
+                borderWidth = .1,
+                tooltip = list(valueDecimals = 2)) %>% 
+  hc_colorAxis(stops = color_stops(colors = scales::viridis_pal(option = "A")(10)),
+               max = max(200)) %>% 
+  hc_mapNavigation(enabled = TRUE) %>% 
+  hc_legend(verticalAlign = "top") %>% 
+  hc_motion(labels = unique(mobile$year))
+```
+
+#### Code {-}
+
+```{r ref.label='map-highcharts', echo=TRUE, eval=FALSE}
+```
+
+### {.unlisted .unnumbered}
+
+<details>
+  <summary>Alternativ: "Timeline" in `{echarts4r}`</summary>
+
+```{r map-echarts, echo=TRUE, warning=FALSE}
 library(echarts4r)
 
 mobile %>% 
@@ -19,13 +52,7 @@ mobile %>%
   e_title("Mobilfunkanschlüsse pro 100 Menschen")
 ```
 
-#### Code {-}
-
-```{r}
-decorate("map-echarts", eval = FALSE) %>% 
-  flair("group_by(year)") %>% 
-  flair("timeline = TRUE")
-```
+</details>
 
 ### {.unlisted .unnumbered}
 
@@ -37,7 +64,7 @@ Nachteile:
 
 ### [`{crosstalk}`](https://rstudio.github.io/crosstalk/) {.panelset}
 
-Ermöglicht Cross-Widget-Interaktionen
+Ermöglicht Cross-Widget-Interaktionen. Bsp.: https://rpubs.com/long39ng/bbc-women-2020
 
 #### Plots {-}
 

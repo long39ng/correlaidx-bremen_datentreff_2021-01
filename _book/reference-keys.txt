@@ -5,7 +5,7 @@ karte-für-ein-bestimmtes-jahr
 facetted-grafik-für-mehrere-jahre
 gif-animationen
 htmlwidgets
-timeline-in-echarts4r
+motion-in-highcharter
 crosstalk
 einführung-in-shiny-mit-shinydashboard
 warum-shinydashboard

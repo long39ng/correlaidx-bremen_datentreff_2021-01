@@ -4,10 +4,10 @@
 
 - Im Vergleich zu Base-Shiny:
   - Weniger Aufwand nötig für ein dezentes Layout
-- Im Vergleich zu `{flexdashboard}`:
+- Im Vergleich zu `{flexdashboard}`^[Beispiel `flexdashboard`: Unsere Commuter-App https://commute.correlaid.org]:
   - Mehr Gestaltungsflexibilität
   - Kompatibel mit mehr htmlwidgets/Paketen
-  - Viel kürzere Ladezeit, weil ein `flexdashboard` geknittet werden muss^[Mit der Option `runtime: shiny_prerendered` kann die Ladezeit deutlich reduziert werden. Dafür muss der Code allerdings angepasst werden, sodass es nicht mehr einfacher als `{shinydashboard}` ist.]
+  - Viel kürzere Ladezeit, weil ein `flexdashboard` geknittet werden muss^[Mit der Option `runtime: shiny_prerendered` kann die Ladezeit bei `flexdashboard` deutlich reduziert werden. Dafür muss der Code allerdings angepasst werden, sodass es nicht mehr einfacher als `{shinydashboard}` ist.]
 
 ## Struktur eines `shinydashboard` {.panelset}
 

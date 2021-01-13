@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = FALSE,
 options(tibble.print_min = 6)
 
 xaringanExtra::use_panelset(in_xaringan = FALSE)
-
-library(flair)
 ```
 
 ```{r}
